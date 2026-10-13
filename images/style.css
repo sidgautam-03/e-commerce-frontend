@@ -1,0 +1,47 @@
+sticky_header{
+    
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    height: 100px;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.page {
+    display: flex;
+}
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    width: 100px;
+    height: 100vh;
+    background-color: blue;
+    color: white;
+}
+
+.content-section {
+    flex: 1;
+    padding: 1rem;
+}

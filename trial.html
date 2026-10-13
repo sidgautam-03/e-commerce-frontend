@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShopKart: mobiles, electronics, furniture, grocery, books and more at great prices.">
+    <title>ShopKart | Online Shopping for Mobiles, Electronics, Furniture and More</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --blue: #2874f0;
+            --yellow: #ffe500;
+            --orange: #fb641b;
+            --page: #f1f3f6;
+            --ink: #212121;
+            --muted: #878787;
+            --green: #388e3c;
+        }
+
+        body {
+            font-family: Roboto, Arial, sans-serif;
+            background-color: var(--page);
+            color: var(--ink);
+        }
+
+        /* ---------- Header ---------- */
+        .site-header { background-color: var(--blue); }
+
+        .brand {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-style: italic;
+            text-decoration: none;
+        }
+        .brand small {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--yellow);
+            margin-top: -4px;
+        }
+
+        .search { flex: 1 1 100%; }
+        .search .form-control { border: 0; border-radius: 2px 0 0 2px; }
+        .search .btn { border-radius: 0 2px 2px 0; background: #fff; color: var(--blue); border: 0; }
+
+        .btn-login {
+            background: #fff;
+            color: var(--blue);
+            font-weight: 500;
+            padding: 0.25rem 2.5rem;
+            border-radius: 2px;
+        }
+        .site-header .nav-link,
+        .site-header .dropdown-toggle { color: #fff; font-weight: 500; }
+
+        /* ---------- Category strip ---------- */
+        .categories {
+            background: #fff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .cat-scroll {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            padding: 0.75rem 0;
+            scrollbar-width: none;
+        }
+        .cat-scroll::-webkit-scrollbar { display: none; }
+        .cat {
+            flex: 0 0 auto;
+            min-width: 72px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .cat span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 4px;
+            font-size: 1.8rem;
+            background: var(--page);
+            border-radius: 50%;
+        }
+
+        /* ---------- Hero carousel ---------- */
+        .slide {
+            min-height: clamp(180px, 32vw, 320px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 1.5rem 3.5rem;
+            color: #fff;
+        }
+        .slide h2 { font-size: clamp(1.4rem, 4vw, 2.6rem); font-weight: 700; }
+        .slide p { font-size: clamp(0.9rem, 2vw, 1.25rem); margin-bottom: 1rem; }
+        .slide-1 { background: linear-gradient(120deg, #2874f0, #1b4fb8); }
+        .slide-2 { background: linear-gradient(120deg, #e8590c, #c2410c); }
+        .slide-3 { background: linear-gradient(120deg, #0f7b5f, #2fa57a); }
+        .btn-shop { background: var(--yellow); color: var(--ink); font-weight: 500; width: fit-content; }
+
+        /* ---------- Product sections ---------- */
+        .block { background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
+        .block-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .block-head h2 { font-size: 1.25rem; font-weight: 500; margin: 0; }
+        .btn-view { background: var(--blue); color: #fff; font-size: 0.85rem; }
+
+        .product {
+            display: block;
+            height: 100%;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--ink);
+        }
+        .product:hover .name { color: var(--blue); }
+        .thumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 130px;
+            margin-bottom: 0.75rem;
+            font-size: 3.5rem;
+            background: var(--page);
+            border-radius: 4px;
+        }
+        .name { font-size: 0.9rem; font-weight: 500; margin: 0; }
+        .price { font-weight: 500; margin: 2px 0 0; }
+        .mrp { color: var(--muted); text-decoration: line-through; font-size: 0.8rem; margin-left: 4px; }
+        .off { color: var(--green); font-size: 0.8rem; font-weight: 500; }
+
+        /* ---------- Promo banners ---------- */
+        .promo {
+            display: block;
+            height: 100%;
+            padding: 1.5rem;
+            border-radius: 4px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .promo h3 { font-size: 1.2rem; font-weight: 600; }
+        .promo p { margin: 0; font-size: 0.9rem; }
+        .promo-a { background: #7c3aed; }
+        .promo-b { background: #0e7490; }
+        .promo-c { background: #be123c; }
+
+        /* ---------- Footer ---------- */
+        footer { background: #172337; color: #fff; }
+        footer h3 { font-size: 0.75rem; color: #878787; text-transform: uppercase; margin-bottom: 0.75rem; }
+        footer ul { list-style: none; padding: 0; margin: 0; font-size: 0.85rem; }
+        footer li { margin-bottom: 0.4rem; }
+        footer a { color: #fff; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        .copy { border-top: 1px solid #454d5e; font-size: 0.8rem; }
+
+        /* ---------- Breakpoints ---------- */
+        @media (min-width: 992px) {
+            .search { flex: 1 1 auto; max-width: 560px; margin: 0 1.5rem; }
+        }
+        @media (max-width: 575.98px) {
+            .slide { padding: 1rem 2.5rem; }
+            .thumb { height: 100px; font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== Header ===== -->
+    <header class="site-header sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-xl">
+                <a href="#" class="brand order-1">ShopKart<small>Explore <b>Plus</b></small></a>
+
+                <button class="navbar-toggler order-2 ms-auto" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#mainNav"
+                        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <form class="search order-3 order-lg-2 d-flex my-2 my-lg-0" role="search" action="#">
+                    <input class="form-control" type="search" placeholder="Search for products, brands and more" aria-label="Search">
+                    <button class="btn" type="submit" aria-label="Search">&#128269;</button>
+                </form>
+
+                <div class="collapse navbar-collapse order-4 order-lg-3 flex-lg-grow-0" id="mainNav">
+                    <ul class="navbar-nav align-items-lg-center gap-lg-3 pt-2 pt-lg-0">
+                        <li class="nav-item"><a class="btn btn-login" href="#">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Become a Seller</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">More</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Notifications</a></li>
+                                <li><a class="dropdown-item" href="#">24x7 Customer Care</a></li>
+                                <li><a class="dropdown-item" href="#">Advertise</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">&#128722; Cart <span class="badge text-bg-warning">0</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== Category strip ===== -->
+    <section class="categories" aria-label="Shop by category">
+        <div class="container-xl">
+            <div class="cat-scroll">
+                <a href="#" class="cat"><span>&#128241;</span>Mobiles</a>
+                <a href="#" class="cat"><span>&#128187;</span>Electronics</a>
+                <a href="#" class="cat"><span>&#128085;</span>Fashion</a>
+                <a href="#" class="cat"><span>&#128715;</span>Furniture</a>
+                <a href="#" class="cat"><span>&#128250;</span>Appliances</a>
+                <a href="#" class="cat"><span>&#129363;</span>Grocery</a>
+                <a href="#" class="cat"><span>&#128218;</span>Books</a>
+                <a href="#" class="cat"><span>&#129524;</span>Beauty</a>
+                <a href="#" class="cat"><span>&#129528;</span>Toys</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container-xl py-3">
+
+        <!-- ===== Hero carousel ===== -->
+        <div id="hero" class="carousel slide mb-3" data-bs-ride="carousel" aria-label="Featured offers">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#hero" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#hero" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#hero" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner rounded">
+                <div class="carousel-item active">
+                    <div class="slide slide-1">
+                        <h2>Big savings on mobiles and electronics</h2>
+                        <p>Up to 60% off on top picks</p>
+                        <a href="#" class="btn btn-shop">Shop now</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="slide slide-2">
+                        <h2>Furniture for every room</h2>
+                        <p>Sofas, beds and chairs starting at &#8377;999</p>
+                        <a href="#" class="btn btn-shop">Shop furniture</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="slide slide-3">
+                        <h2>Daily groceries at low prices</h2>
+                        <p>Stock up on essentials and save</p>
+                        <a href="#" class="btn btn-shop">Shop grocery</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#hero" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#hero" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- ===== Best of Electronics ===== -->
+        <section class="block mb-3">
+            <div class="block-head">
+                <h2>Best of Electronics</h2>
+                <a href="#" class="btn btn-sm btn-view">View all</a>
+            </div>
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-0">
+                <div class="col"><a href="#" class="product">
+                    <div class="thumb">&#128241;</div>
+                    <p class="name">5G Smartphone, 128 GB</p>
+                    <p class="price">&#8377;10,999 <span class="mrp">&#8377;14,999</span></p>
+                    <span class="off">27% off</span>
+                </a></div>
+                <div class="col"><a href="#" class="product">
+                    <div class="thumb">&#127911;</div>
+                    <p class="name">Wireless Earbuds</p>
+                    <p class="price">&#8377;999 <span class="mrp">&#8377;2,999</span></p>
+                    <span class="off">67% off</span>
+                </a></div>
+                <div class="col"><a href="#" class="product">
+                    <div class="thumb">&#8986;</div>
+                    <p class="name">Smart Watch</p>
+                    <p class="price">&#8377;2,499 <span class="mrp">&#8377;5,999</span></p>
+                    <span class="off">58% off</span>
+                </a></div>
+                <div class="col"><a href="#" class="product">
+                    <div class="thumb">&#128187;</div>
+                    <p class="name">Laptop, 15.6 inch</p>
+                    <p class="price">&#8377;34,990 <span class="mrp">&#8377;45,990</span></p>
+                    <span class="off">24% off</span>
+                </a></div>
+                <div class="col"><a href="#" class="product">
+                    <div class="thumb">&#128247;</div>
+                    <p class="name">Action Camera</p>
+                    <p class="price">&#8377;3,999 <span class="mrp">&#8377;7,999</span></p>
+                    <span class="off">50% off</span>
+                </a></div>
+            </div>
+        </section>
+
+        <!-- ===== Promo banners ===== -->
+        <section class="row g-3 mb-3" aria-label="Offers">
+            <div class="col-12 col-md-4"><a href="#" class="promo promo-a">
+                <h3>Fashion sale</h3><p>Min. 40% off on clothing and shoes</p>
+            </a></div>
+            <div class="col-12 col-md-4"><a href="#" class="promo promo-b">
+                <h3>Home and kitchen</h3><p>Appliances from &#8377;499</p>
+            </a></div>
+            <div class="col-12 col-md-4"><a href="#" class="promo promo-c">
+                <h3>Books and stationery</h3><p>Bestsellers at up to 50% off</p>
+            </a></div>
+        </section>
+
+        <!-- ===== Deals of the Day ===== -->
+        <section class="block mb-3">
+            <div class="block-head">
+                <h2>Deals of the Day</h2>
+                <a href="#" class="btn btn-sm btn-view">View all</a>
+            </div>
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-0">
+                <div class="col"><a href="#" class="product">
+                    <div class="thumb">&#128715;</div>
+                    <p class="name">3-Seater Sofa</p>
+                    <p class="price">&#8377;14,999 <span class="mrp">&#8377;29,999</span></p>
+                    <span class="off">50% off</span>
+                </a></div>
+                <div class="col"><a href="#" class="product">
+                    <div class="thumb">&#128095;</div>
+                    <p class="name">Running Shoes</p>
+                    <p class="price">&#8377;1,299 <span class="mrp">&#8377;2,999</span></p>
+                    <span class="off">57% off</span>
+                </a></div>
+                <div class="col"><a href="#" class="product">
+                    <div class="thumb">&#128218;</div>
+                    <p class="name">Bestseller Book Set</p>
+                    <p class="price">&#8377;499 <span class="mrp">&#8377;999</span></p>
+                    <span class="off">50% off</span>
+                </a></div>
+                <div class="col"><a href="#" class="product">
+                    <div class="thumb">&#129681;</div>
+                    <p class="name">Study Chair</p>
+                    <p class="price">&#8377;3,499 <span class="mrp">&#8377;6,999</span></p>
+                    <span class="off">50% off</span>
+                </a></div>
+                <div class="col"><a href="#" class="product">
+                    <div class="thumb">&#129363;</div>
+                    <p class="name">Grocery Combo Pack</p>
+                    <p class="price">&#8377;799 <span class="mrp">&#8377;1,199</span></p>
+                    <span class="off">33% off</span>
+                </a></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <div class="container-xl py-4">
+            <div class="row g-4">
+                <div class="col-6 col-md-3">
+                    <h3>About</h3>
+                    <ul><li><a href="#">Contact Us</a></li><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h3>Help</h3>
+                    <ul><li><a href="#">Payments</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">FAQ</a></li></ul>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h3>Policy</h3>
+                    <ul><li><a href="#">Return Policy</a></li><li><a href="#">Terms of Use</a></li><li><a href="#">Security</a></li><li><a href="#">Privacy</a></li></ul>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h3>Social</h3>
+                    <ul><li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li><li><a href="#">YouTube</a></li><li><a href="#">X</a></li></ul>
+                </div>
+            </div>
+        </div>
+        <div class="copy text-center py-3">&copy; 2026 ShopKart. A practice project.</div>
+    </footer>
+
+    <!-- Bootstrap 5 JS (needed for the carousel, dropdown and menu toggle) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
